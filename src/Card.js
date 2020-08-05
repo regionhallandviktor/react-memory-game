@@ -7,7 +7,7 @@ export default function Card(props) {
             onClick={() => {
                 return props.clickHandler(props.id);
             }}
-            className="border-2 leading-8 text-5xl"
+            className="border-2 leading-8 text-5xl my-8"
         >
             {props.revealed ? props.text : ""}
         </button>
