@@ -36,11 +36,10 @@ class App extends React.Component {
     }
 
     restart() {
-        console.log("Restart");
         nrRevealed = 0;
         lookingForPair = 0;
-        let cards = this.setupCards();
-        this.setState({ cardStates: cards });
+        let cards = this.setupCards(); // Nya fräscha kort med alla default states
+        this.setState({ cardStates: cards }); // Uppdatera state med de nya korten
     }
     cardClick(id) {
         let cardArray = this.state.cardStates; // Tillfällig array med objekt för varje korts olika värden
@@ -48,8 +47,8 @@ class App extends React.Component {
             // Vänd ned korten vid klick om två kort redan är uppe
             cardArray.forEach((element) => {
                 if (!element.found) {
-                    element.revealed = false;
-                } // Sätt vänd-status till nedvänd på kort som inte ingår i hittade par
+                    element.revealed = false; // Sätt vänd-status till nedvänd på kort som inte ingår i hittade par
+                }
             });
             this.setState({ cardStates: cardArray }); // Uppdatera state med data från tillfälig array
             nrRevealed = 0; // Uppdatera räknaren för antal uppvända kort.
@@ -64,7 +63,7 @@ class App extends React.Component {
             if (cardArray[id].pairID === lookingForPair) {
                 // Kontrollera om korten matchar
                 cardArray.forEach((element) => {
-                    // Gå igenom arrayen och markera paret som hittade
+                    // Gå igenom arrayen och markera paret som hittat
                     if (element.pairID === lookingForPair) {
                         element.found = true;
                     }
@@ -94,16 +93,16 @@ class App extends React.Component {
                     })}
                     {this.state.solved && <div>Grattis!</div>}
                 </div>
-				<div className="flex">
-					<button
-						className="mx-auto border-2 border-gray p-4 bg-orange-300"
-						onClick={() => {
-							this.restart();
-						}}
-					>
-						Börja om
-					</button>
-				</div>
+                <div className="flex">
+                    <button
+                        className="mx-auto border-2 border-gray p-4 bg-orange-300"
+                        onClick={() => {
+                            this.restart();
+                        }}
+                    >
+                        Börja om
+                    </button>
+                </div>
             </>
         );
     }
