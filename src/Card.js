@@ -1,5 +1,14 @@
 import React from "react";
 
-export default function Card({ revealed, key, value, clickHandler }) {
-    return <button onClick={clickHandler(key)} className="border-2">{revealed ? value : 'Visa'}</button>;
+export default function Card(props) {
+    return (
+        <button
+            onClick={() => {
+                return props.clickHandler(props.id);
+            }}
+            className="border-2"
+        >
+            {props.revealed ? "Fisk" : "Visa"}
+        </button>
+    );
 }
