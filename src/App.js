@@ -100,7 +100,7 @@ class App extends React.Component {
                     </div>
                 )}
 
-                <div className="grid grid-cols-4 gap-4 mx-auto mt-4 max-w-6xl">
+                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 mx-auto mt-4 max-w-6xl">
                     {this.state.cardStates.map((current, index) => {
                         return (
                             <Card
