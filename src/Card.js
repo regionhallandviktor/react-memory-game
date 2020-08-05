@@ -1,4 +1,5 @@
 import React from "react";
+import './Card.css'
 
 export default function Card(props) {
     return (
@@ -6,9 +7,9 @@ export default function Card(props) {
             onClick={() => {
                 return props.clickHandler(props.id);
             }}
-            className="border-2"
+            className="border-2 leading-8 text-5xl"
         >
-            {props.revealed ? "Fisk" : "Visa"}
+            {props.revealed ? props.text : ""}
         </button>
     );
 }
