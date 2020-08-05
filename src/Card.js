@@ -1,8 +1,5 @@
 import React from "react";
 
-export default function Card({ value, revealed }) {
-	function toggleReveal(e) {
-		console.log(e)
-	}
-    return <button className="border-2" onClick={toggleReveal}>{revealed ? value : 'Visa'}</button>;
+export default function Card({ revealed, key, value, clickHandler }) {
+    return <button onClick={clickHandler(key)} className="border-2">{revealed ? value : 'Visa'}</button>;
 }

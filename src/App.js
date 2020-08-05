@@ -1,32 +1,45 @@
-import React, { useState } from "react";
+import React from "react";
 import Card from "./Card";
 
-function App() {
-    const [nrOfPairs, setnrOfCards] = useState(6);
-    const [cardStates, setCardStates] = useState(() => {
-		let cards = [];
-		let pair = 1;
-        for (let i = 1; i < nrOfPairs + 1; i++) {
-			cards.push({id: pair, pairId: i, revealed: false, found: false});
-			pair++;
-			cards.push({id: pair, pairId: i, revealed: false, found: false});
-			pair++;
-        }
-        return cards;
-    });
-    let cardArray = [];
-    console.log(cardStates);
-    Object.entries(cardStates).map(([key, value]) => {
-		console.log(key, value)
-        cardArray.push(<Card key={key} id={value.id} pairId={value.pairId} revealed={value.revealed} found={value.found} />);
-    });
-    console.log(cardArray);
+class App extends React.Component {
+	constructor (props) {
+		super(props);
 
-    return (
-        <div className="grid grid-cols-4 gap-4 mx-auto max-w-6xl">
-            {cardArray}
+		this.state = {
+			cardStates: [
+				{id: 1, pairID: 1, revealed: false, found: false},
+				{id: 2, pairID: 1, revealed: false, found: false},
+				{id: 3, pairID: 2, revealed: false, found: false},
+				{id: 4, pairID: 2, revealed: false, found: false},
+				{id: 5, pairID: 3, revealed: false, found: false},
+				{id: 6, pairID: 3, revealed: false, found: false},
+				{id: 7, pairID: 4, revealed: false, found: false},
+				{id: 8, pairID: 4, revealed: false, found: false},
+				{id: 9, pairID: 5, revealed: false, found: false},
+				{id: 10, pairID: 5, revealed: false, found: false},
+				{id: 11, pairID: 6, revealed: false, found: false},
+				{id: 12, pairID: 6, revealed: false, found: false},
+			]
+		}
+		this.toggleRevealed = this.toggleRevealed.bind(this)
+	}
+
+	toggleRevealed (key) {
+		console.log("Toggle revealed")
+		console.log(key)
+	}
+
+	render () {
+		return (
+			<div className="grid grid-cols-4 gap-4 mx-auto max-w-6xl">
+            {this.state.cardStates.map((current, index) => {
+				return (
+					<Card key={index} pairID={current.pairID} revealed={current.revealed} found={current.found} value={current.pairID} clickHandler={this.toggleRevealed} />
+				)
+			})}
         </div>
-    );
+		)
+	}
 }
 
 export default App;
