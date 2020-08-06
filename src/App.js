@@ -119,7 +119,8 @@ class App extends React.Component {
                                 id={index}
                                 revealed={this.state.cardStates[index].revealed}
                                 clickHandler={this.cardClick}
-                                text={this.state.cardStates[index].value}
+								text={this.state.cardStates[index].value}
+								found={this.state.cardStates[index].found}
                             />
                         );
                     })}
