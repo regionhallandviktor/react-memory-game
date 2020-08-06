@@ -4,6 +4,8 @@ import "./Card.css";
 export default function Card(props) {
 	let classes = ""
 	let sizes = ""
+
+	// Different card sizes and margins depending on deck size
 	switch(props.pairCount) {
 		case 4:
 			sizes = "my-2 md:my-6 h-32 md:h-64";
@@ -16,6 +18,7 @@ export default function Card(props) {
 			break
 		default:
 	}
+	// Different look of the cards depending on revealed/found/unrevealed
 	if(props.found) {
 		classes = "card--found border-2 leading-8 md:text-5xl " + sizes
 	} else if(props.revealed) {
