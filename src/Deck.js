@@ -1,8 +1,8 @@
-export default function Deck () {
+export default function Deck (pairCount) {
 	let rawCards = [];
 	let words = ['Flundra', 'Kotte', 'Pinne', 'Planka', 'Sten', 'Mossa', 'Träd', 'Stubbe', 'Blåbär', 'Lingon', 'Svamp', 'Älg', 'Hare', 'Kanin', 'Mus', 'Ekorre']
 	words = shuffleArray(words);
-	for (let i = 0; i < 4; i++) {
+	for (let i = 0; i < pairCount; i++) {
 		rawCards.push(
 			{ revealed: false, pairID: i, found: false, value: words[i]},
 			{ revealed: false, pairID: i, found: false, value: words[i] }

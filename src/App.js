@@ -10,7 +10,7 @@ var nrOfPairs = 4;
 class App extends React.Component {
     constructor(props) {
         super(props);
-        let cards = Deck();
+        let cards = Deck(nrOfPairs);
         this.state = {
             solved: false,
             cardStates: cards,
@@ -18,12 +18,13 @@ class App extends React.Component {
         this.cardClick = this.cardClick.bind(this);
     }
 
-	restart() {
+	restart(pairCount) {
         console.log("Restart triggered");
         nrRevealed = 0;
         lookingForPair = 0;
-        foundPairs = 0;
-        let cards = Deck(); // Nya fräscha kort med alla default states
+		foundPairs = 0;
+		nrOfPairs = pairCount
+        let cards = Deck(pairCount); // Nya fräscha kort med alla default states
         this.setState({ cardStates: cards }); // Uppdatera state med de nya korten
         this.setState({ solved: false }); // Gick inte att uppdatera hela state-objektet på en gång så...
     }
@@ -78,25 +79,40 @@ class App extends React.Component {
     render() {
         return (
             <>
-                {this.state.solved && (
-                    <div className="flex">
+                    <div className="flex justify-center">
                         <button
-                            className="mx-auto border-2 border-orange-300 rounded-lg mt-4 p-4 bg-orange-200"
+                            className="border-2 border-orange-300 rounded-lg mt-4 p-4 bg-orange-200"
                             onClick={() => {
-                                this.restart();
+                                this.restart(4);
                             }}
                         >
-                            Nytt spel
+                            Nytt spel (8 kort)
+                        </button>
+						<button
+                            className="border-2 mx-4 border-orange-300 rounded-lg mt-4 p-4 bg-orange-200"
+                            onClick={() => {
+                                this.restart(8);
+                            }}
+                        >
+                            Nytt spel (16 kort)
+                        </button>
+						<button
+                            className="border-2 border-orange-300 rounded-lg mt-4 p-4 bg-orange-200"
+                            onClick={() => {
+                                this.restart(16);
+                            }}
+                        >
+                            Nytt spel (32 kort)
                         </button>
                     </div>
-                )}
 
-                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 mx-auto mt-4 max-w-6xl">
+                <div className="grid grid-cols-3 lg:grid-cols-4 gap-4 mx-auto mt-4 max-w-6xl">
                     {this.state.cardStates.map((current, index) => {
                         return (
                             <Card
                                 key={index}
-                                id={index}
+								id={index}
+								pairCount={nrOfPairs}
                                 revealed={this.state.cardStates[index].revealed}
                                 clickHandler={this.cardClick}
 								text={this.state.cardStates[index].value}
