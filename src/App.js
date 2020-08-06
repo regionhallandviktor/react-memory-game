@@ -1,5 +1,6 @@
 import React from "react";
 import Card from "./Card";
+import Deck from "./Deck"
 
 var nrRevealed = 0;
 var lookingForPair = 0;
@@ -9,41 +10,20 @@ var nrOfPairs = 4;
 class App extends React.Component {
     constructor(props) {
         super(props);
-        let cards = this.setupCards();
+        let cards = Deck();
         this.state = {
             solved: false,
             cardStates: cards,
         };
         this.cardClick = this.cardClick.bind(this);
-        this.setupCards = this.setupCards.bind(this);
-        this.restart = this.restart.bind(this);
-    }
-    setupCards() {
-        let rawCards = [
-            { revealed: false, pairID: 0, found: false, value: "Flundra" },
-            { revealed: false, pairID: 0, found: false, value: "Flundra" },
-            { revealed: false, pairID: 1, found: false, value: "Kotte" },
-            { revealed: false, pairID: 1, found: false, value: "Kotte" },
-            { revealed: false, pairID: 2, found: false, value: "Pinne" },
-            { revealed: false, pairID: 2, found: false, value: "Pinne" },
-            { revealed: false, pairID: 3, found: false, value: "Planka" },
-            { revealed: false, pairID: 3, found: false, value: "Planka" },
-        ];
-        for (let i = rawCards.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * i);
-            const temp = rawCards[i];
-            rawCards[i] = rawCards[j];
-            rawCards[j] = temp;
-        }
-        return rawCards;
     }
 
-    restart() {
+	restart() {
         console.log("Restart triggered");
         nrRevealed = 0;
         lookingForPair = 0;
         foundPairs = 0;
-        let cards = this.setupCards(); // Nya fräscha kort med alla default states
+        let cards = Deck(); // Nya fräscha kort med alla default states
         this.setState({ cardStates: cards }); // Uppdatera state med de nya korten
         this.setState({ solved: false }); // Gick inte att uppdatera hela state-objektet på en gång så...
     }
