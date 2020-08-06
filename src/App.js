@@ -51,13 +51,24 @@ class App extends React.Component {
         let cardArray = this.state.cardStates; // Tillfällig array med objekt för varje korts olika värden
         if (nrRevealed === 2) {
             // Vänd ned korten vid klick om två kort redan är uppe
-            cardArray.forEach((element) => {
+            let shouldBeOpened = false; // Flagga för om ett klickat kort skall öppnas
+            cardArray.forEach((element, index) => {
                 if (!element.found) {
-                    element.revealed = false; // Sätt vänd-status till nedvänd på kort som inte ingår i hittade par
+                    if (!element.revealed && index === id) {
+                        shouldBeOpened = true;
+                    } else {
+                        element.revealed = false; // Sätt vänd-status till nedvänd på kort som inte ingår i hittade par
+                    }
                 }
             });
+            if (shouldBeOpened) {
+                cardArray[id].revealed = true;
+                nrRevealed = 1;
+                lookingForPair = cardArray[id].pairID;
+            } else {
+                nrRevealed = 0; // Uppdatera räknaren för antal uppvända kort.
+            }
             this.setState({ cardStates: cardArray }); // Uppdatera state med data från tillfälig array
-            nrRevealed = 0; // Uppdatera räknaren för antal uppvända kort.
         } else if (nrRevealed === 0 && !cardArray[id].found) {
             cardArray[id].revealed = !cardArray[id].revealed; // Toggla statusen för uppvänt på rätt objekt i arrayen
             this.setState({ cardStates: cardArray }); // Uppdatera states med data från den tillfälliga arrayen
@@ -69,7 +80,7 @@ class App extends React.Component {
             if (cardArray[id].pairID === lookingForPair) {
                 // Hittat ett par - korten matchar
                 cardArray.forEach((element) => {
-                    // Gå igenom arrayen och markera paret som hittat
+                    // Gå igenom arrayen och markera som hittade
                     if (element.pairID === lookingForPair) {
                         element.found = true;
                     }
