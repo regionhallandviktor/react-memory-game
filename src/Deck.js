@@ -1,19 +1,23 @@
 export default function Deck () {
-	let rawCards = [
-		{ revealed: false, pairID: 0, found: false, value: "Flundra" },
-		{ revealed: false, pairID: 0, found: false, value: "Flundra" },
-		{ revealed: false, pairID: 1, found: false, value: "Kotte" },
-		{ revealed: false, pairID: 1, found: false, value: "Kotte" },
-		{ revealed: false, pairID: 2, found: false, value: "Pinne" },
-		{ revealed: false, pairID: 2, found: false, value: "Pinne" },
-		{ revealed: false, pairID: 3, found: false, value: "Planka" },
-		{ revealed: false, pairID: 3, found: false, value: "Planka" },
-	];
-	for (let i = rawCards.length - 1; i > 0; i--) {
-		const j = Math.floor(Math.random() * i);
-		const temp = rawCards[i];
-		rawCards[i] = rawCards[j];
-		rawCards[j] = temp;
+	let rawCards = [];
+	let words = ['Flundra', 'Kotte', 'Pinne', 'Planka', 'Sten', 'Mossa', 'Träd', 'Stubbe', 'Blåbär', 'Lingon', 'Svamp', 'Älg', 'Hare', 'Kanin', 'Mus', 'Ekorre']
+	words = shuffleArray(words);
+	for (let i = 0; i < 4; i++) {
+		rawCards.push(
+			{ revealed: false, pairID: i, found: false, value: words[i]},
+			{ revealed: false, pairID: i, found: false, value: words[i] }
+		);
 	}
+	rawCards = shuffleArray(rawCards);
 	return rawCards;
+}
+
+function shuffleArray(input) {
+	for (let i = input.length - 1; i > 0; i--) {
+		const j = Math.floor(Math.random() * i);
+		const temp = input[i];
+		input[i] = input[j];
+		input[j] = temp;
+	}
+	return input
 }
