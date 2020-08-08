@@ -1,8 +1,10 @@
 import React from "react";
 import Card from "./Card";
 import Deck from "./Deck";
-import IconClose from "./iconClose"
-import IconMenu from "./iconMenu"
+import IconClose from "./iconClose";
+import IconMenu from "./iconMenu";
+import Button from "./Button"
+import SettingsScreen from "./SettingsScreen";
 
 var lookingForPair;
 var nrOfPairs = 4;
@@ -14,11 +16,11 @@ class App extends React.Component {
         let cards = Deck(nrOfPairs);
         this.state = {
             menuOpen: true,
-            solved: false,
             cardStates: cards,
         };
         this.cardClick = this.cardClick.bind(this);
         this.toggleMenu = this.toggleMenu.bind(this);
+        this.restart = this.restart.bind(this);
     }
 
     toggleMenu() {
@@ -27,13 +29,11 @@ class App extends React.Component {
     }
 
     restart(pairCount) {
-        console.log("Restart triggered");
         lookingForPair = 0;
         moveAvailableToggle = true;
         nrOfPairs = pairCount;
         let cards = Deck(pairCount); // Nya fräscha kort med alla default states
         this.setState({ cardStates: cards }); // Uppdatera state med de nya korten
-        this.setState({ solved: false }); // Gick inte att uppdatera hela state-objektet på en gång så...
         this.setState({ menuOpen: false });
     }
 
@@ -85,40 +85,30 @@ class App extends React.Component {
                         onClick={this.toggleMenu}
                         className="border-2 border-black rounded-lg m-4 p-4 bg-gray-200"
                     >
-                        {this.state.menuOpen ? (
-                            <IconClose />
-                        ) : (
-                            <IconMenu />
-                        )}
+                        {this.state.menuOpen ? <IconClose /> : <IconMenu />}
                     </button>
                 </div>
                 {this.state.menuOpen ? (
-                    <div className="flex px-4 flex-wrap justify-center">
-                        <button
-                            className="border-2 border-orange-300 rounded-lg mt-4 p-4 bg-orange-200"
-                            onClick={() => {
-                                this.restart(4);
-                            }}
-                        >
-                            Nytt spel (8 kort)
-                        </button>
-                        <button
-                            className="border-2 mx-4 border-orange-300 rounded-lg mt-4 p-4 bg-orange-200"
-                            onClick={() => {
-                                this.restart(8);
-                            }}
-                        >
-                            Nytt spel (16 kort)
-                        </button>
-                        <button
-                            className="border-2 border-orange-300 rounded-lg mt-4 p-4 bg-orange-200"
-                            onClick={() => {
-                                this.restart(16);
-                            }}
-                        >
-                            Nytt spel (32 kort)
-                        </button>
-                    </div>
+                    <SettingsScreen>
+                        <Button
+                            clickHandler={this.restart}
+                            text="Nytt spel (8 kort)"
+							pairCount={4}
+							extraClasses=""
+                        />
+                        <Button
+                            clickHandler={this.restart}
+                            text="Nytt spel (16 kort)"
+							pairCount={8}
+							extraClasses="mx-4"
+                        />
+                        <Button
+                            clickHandler={this.restart}
+                            text="Nytt spel (32 kort)"
+							pairCount={16}
+							extraClasses=""
+                        />
+                    </SettingsScreen>
                 ) : (
                     <div className="grid grid-cols-3 lg:grid-cols-4 gap-4 mx-auto mt-4 max-w-6xl">
                         {this.state.cardStates.map((current, index) => {
