@@ -1,6 +1,8 @@
 import React from "react";
 import Card from "./Card";
 import Deck from "./Deck";
+import IconClose from "./iconClose"
+import IconMenu from "./iconMenu"
 
 var lookingForPair;
 var nrOfPairs = 4;
@@ -84,38 +86,9 @@ class App extends React.Component {
                         className="border-2 border-black rounded-lg m-4 p-4 bg-gray-200"
                     >
                         {this.state.menuOpen ? (
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="24"
-                                height="24"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                stroke-width="2"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                class="feather feather-x"
-                            >
-                                <line x1="18" y1="6" x2="6" y2="18"></line>
-                                <line x1="6" y1="6" x2="18" y2="18"></line>
-                            </svg>
+                            <IconClose />
                         ) : (
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="24"
-                                height="24"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                stroke-width="2"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                class="feather feather-menu"
-                            >
-                                <line x1="3" y1="12" x2="21" y2="12"></line>
-                                <line x1="3" y1="6" x2="21" y2="6"></line>
-                                <line x1="3" y1="18" x2="21" y2="18"></line>
-                            </svg>
+                            <IconMenu />
                         )}
                     </button>
                 </div>
