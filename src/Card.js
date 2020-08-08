@@ -20,11 +20,11 @@ export default function Card(props) {
 	}
 	// Different look of the cards depending on revealed/found/unrevealed
 	if(props.found) {
-		classes = "card--found border-2 leading-8 md:text-5xl " + sizes
+		classes = "card--found border-2 leading-8 text-2xl md:text-5xl " + sizes
 	} else if(props.revealed) {
-		classes = "card--turned border-2 leading-8 md:text-5xl " + sizes
+		classes = "card--turned border-2 leading-8 text-2xl md:text-5xl " + sizes
 	} else {
-		classes = "card border-2 leading-8 md:text-5xl " + sizes
+		classes = "card border-2 leading-8 text-2xl md:text-5xl " + sizes
 	}
 
     return (
